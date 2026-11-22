@@ -3,129 +3,436 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JotCash - Aplikasi Pencatat Keuangan 100% Offline</title>
-    <meta name="description" content="Kelola keuangan pribadi lebih mudah, aman, dan 100% offline langsung di HP Android Anda.">
+    <title>JotCash v3.1.0 — Aplikasi Pencatat Keuangan Pribadi 100% Offline</title>
+    <meta name="description" content="Unduh JotCash APK v3.1.0 resmi karya Rpex. Aplikasi pencatat keuangan Android 100% offline, tanpa iklan, dengan fitur Ekspor Excel (.xlsx) dan Save Data.">
+    <meta name="author" content="Rpex">
+    <link rel="icon" type="image/png" href="logo-jotcash.png">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+    <!-- Google Fonts & Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet" />
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: {
+                        dark: { 950: '#060b14', 900: '#0b1221', 800: '#131d33' }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; }
-        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .text-gradient { background: linear-gradient(to right, #34d399, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        body { background-color: #060b14; color: #f8fafc; overflow-x: hidden; }
+        .glass { background: rgba(19, 29, 51, 0.65); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .glass-hover:hover { border-color: rgba(16, 185, 129, 0.4); background: rgba(19, 29, 51, 0.85); }
+        .text-gradient { background: linear-gradient(135deg, #6ee7b7 0%, #10b981 50%, #059669 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glow-bg { background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.16) 0%, rgba(6, 11, 20, 0) 65%); }
     </style>
 </head>
 <body class="antialiased selection:bg-emerald-500 selection:text-white">
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 glass-card">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center gap-3">
-                    <img src="logo-jotcash.png" alt="JotCash Logo" class="w-10 h-10 rounded-xl shadow-lg" onerror="this.src='https://ui-avatars.com/api/?name=JC&background=10b981&color=fff&rounded=true'">
-                    <span class="font-bold text-xl tracking-tight">JotCash</span>
+    <header class="fixed top-0 w-full z-50 glass border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="logo-jotcash.png" alt="Logo JotCash" class="w-9 h-9 rounded-xl shadow-md group-hover:scale-105 transition-transform" onerror="this.src='https://ui-avatars.com/api/?name=JC&background=10b981&color=fff&bold=true'">
+                <div>
+                    <span class="font-extrabold text-lg tracking-tight block leading-none">JotCash</span>
+                    <span class="text-[11px] text-emerald-400 font-medium">by Rpex</span>
                 </div>
-                <a href="#download" class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2 rounded-full font-medium transition-all shadow-[0_0_15px_rgba(16,185,129,0.4)]">
-                    Unduh Gratis
-                </a>
-            </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
+                <a href="#fitur" class="hover:text-emerald-400 transition-colors">Fitur Unggulan</a>
+                <a href="#pratinjau" class="hover:text-emerald-400 transition-colors">Pratinjau UI</a>
+                <a href="#instalasi" class="hover:text-emerald-400 transition-colors">Cara Install</a>
+                <a href="#changelog" class="hover:text-emerald-400 transition-colors">Riwayat Versi</a>
+                <a href="#faq" class="hover:text-emerald-400 transition-colors">FAQ</a>
+            </nav>
+
+            <a href="JotCash.apk" download class="inline-flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm px-4 py-2 rounded-full transition-all shadow-[0_0_20px_rgba(16,185,129,0.35)]">
+                <span class="material-symbols-outlined text-[18px]">download</span>
+                <span>Unduh APK</span>
+            </a>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-4 text-center">
+    <section class="relative pt-28 pb-16 md:pt-36 md:pb-24 px-4 glow-bg">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Content -->
+            <div class="lg:col-span-7 text-center lg:text-left">
+                <div class="inline-flex flex-wrap items-center justify-center lg:justify-start gap-2 px-3.5 py-1.5 rounded-full glass text-xs font-semibold text-emerald-400 mb-6">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Rilis Resmi v3.1.0</span>
+                    <span class="text-slate-600">•</span>
+                    <span class="text-slate-300">Dikembangkan oleh <strong class="text-white">Rpex</strong></span>
+                </div>
+
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12] mb-6">
+                    Catat Keuangan Lebih Rapi, <span class="text-gradient">100% Offline &amp; Privat.</span>
+                </h1>
+
+                <p class="text-base sm:text-lg text-slate-400 leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0">
+                    <strong class="text-slate-200">JotCash</strong> adalah aplikasi manajemen keuangan Android ringan tanpa iklan dan tanpa akun. Dilengkapi ekspor laporan <strong class="text-emerald-400">Excel (.xlsx)</strong> otomatis serta sistem <strong class="text-emerald-400">Save Data</strong> agar riwayat keuangan Anda aman selamanya.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8">
+                    <a href="JotCash.apk" download class="w-full sm:w-auto flex items-center justify-center gap-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-8 py-4 rounded-2xl font-extrabold text-base transition-all shadow-[0_10px_30px_rgba(16,185,129,0.3)] hover:-translate-y-0.5">
+                        <span class="material-symbols-outlined text-2xl">android</span>
+                        <div class="text-left">
+                            <div class="leading-none">Download JotCash.apk</div>
+                            <div class="text-[11px] font-semibold opacity-80 mt-1">Versi 3.1.0 • Gratis • Tanpa Iklan</div>
+                        </div>
+                    </a>
+                    <a href="#instalasi" class="w-full sm:w-auto flex items-center justify-center gap-2 glass glass-hover text-slate-200 px-6 py-4 rounded-2xl font-semibold text-base transition-all">
+                        <span class="material-symbols-outlined text-emerald-400">help_outline</span>
+                        <span>Panduan Pasang</span>
+                    </a>
+                </div>
+
+                <!-- Trust Indicators -->
+                <div class="grid grid-cols-3 gap-3 max-w-md mx-auto lg:mx-0 pt-4 border-t border-white/10 text-left">
+                    <div>
+                        <div class="text-xs text-slate-500">Privasi Data</div>
+                        <div class="text-sm font-bold text-slate-200">100% Lokal HP</div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500">Format Laporan</div>
+                        <div class="text-sm font-bold text-emerald-400">Excel (.xlsx)</div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500">Kreator &amp; Dev</div>
+                        <div class="text-sm font-bold text-slate-200">Rpex</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Interactive Phone Mockup -->
+            <div id="pratinjau" class="lg:col-span-5 flex flex-col items-center">
+                <div class="w-[300px] sm:w-[320px] bg-dark-900 rounded-[2.6rem] p-3 border-[4px] border-slate-800 shadow-[0_25px_60px_rgba(0,0,0,0.75)] relative">
+                    <!-- Notch -->
+                    <div class="w-24 h-4 bg-slate-950 rounded-full mx-auto mb-2"></div>
+                    
+                    <!-- Screen Content -->
+                    <div class="bg-dark-950 rounded-[2rem] p-4 min-h-[450px] flex flex-col justify-between border border-white/5">
+                        <div>
+                            <!-- App Top Bar -->
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-2">
+                                    <img src="logo-jotcash.png" alt="JC" class="w-7 h-7 rounded-lg" onerror="this.src='https://ui-avatars.com/api/?name=JC&background=10b981&color=fff'">
+                                    <div>
+                                        <div class="text-xs font-bold text-white">JotCash</div>
+                                        <div class="text-[10px] text-slate-400">Halo, Pengguna 👋</div>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 font-semibold border border-emerald-500/30">v3.1.0</span>
+                            </div>
+
+                            <!-- Balance Card -->
+                            <div class="bg-gradient-to-br from-emerald-600 to-teal-800 rounded-2xl p-4 mb-4 shadow-lg">
+                                <div class="flex items-center justify-between text-[11px] text-emerald-100 mb-1">
+                                    <span>Total Saldo Tersedia</span>
+                                    <span class="bg-black/25 px-2 py-0.5 rounded-full text-[10px] flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-[12px]">edit</span> Sesuaikan
+                                    </span>
+                                </div>
+                                <div class="text-2xl font-extrabold text-white tracking-tight">Rp 4.850.000</div>
+                                <div class="text-[10px] text-emerald-100/80 mt-1">100% Tersimpan Aman Offline</div>
+                            </div>
+
+                            <!-- Interactive Preview Switcher -->
+                            <div id="preview-wallets" class="space-y-2.5">
+                                <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Akun &amp; Dompet</div>
+                                <div class="bg-dark-800/90 p-3 rounded-xl flex items-center justify-between border border-white/5">
+                                    <div class="flex items-center gap-2.5">
+                                        <span class="material-symbols-outlined text-emerald-400 bg-emerald-500/10 p-1.5 rounded-lg text-lg">payments</span>
+                                        <div>
+                                            <div class="text-xs font-bold text-white">Tunai Utama</div>
+                                            <div class="text-[10px] text-slate-400">Dompet Harian</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs font-bold text-white">Rp 850.000</div>
+                                </div>
+                                <div class="bg-dark-800/90 p-3 rounded-xl flex items-center justify-between border border-white/5">
+                                    <div class="flex items-center gap-2.5">
+                                        <span class="material-symbols-outlined text-sky-400 bg-sky-500/10 p-1.5 rounded-lg text-lg">account_balance</span>
+                                        <div>
+                                            <div class="text-xs font-bold text-white">Rekening Bank</div>
+                                            <div class="text-[10px] text-slate-400">Tabungan</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs font-bold text-white">Rp 4.000.000</div>
+                                </div>
+                            </div>
+
+                            <div id="preview-tools" class="hidden space-y-2.5">
+                                <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Fitur Keamanan &amp; Laporan</div>
+                                <div class="bg-dark-800/90 p-3 rounded-xl border border-emerald-500/20">
+                                    <div class="flex items-center gap-2 text-xs font-bold text-emerald-400 mb-1">
+                                        <span class="material-symbols-outlined text-base">table_view</span> Ekspor Excel (.xlsx)
+                                    </div>
+                                    <p class="text-[10px] text-slate-400">Laporan 2 Sheet otomatis rapi di WPS Office &amp; Excel.</p>
+                                </div>
+                                <div class="bg-dark-800/90 p-3 rounded-xl border border-white/5">
+                                    <div class="flex items-center gap-2 text-xs font-bold text-white mb-1">
+                                        <span class="material-symbols-outlined text-base text-amber-400">save</span> Backup Save Data (.json)
+                                    </div>
+                                    <p class="text-[10px] text-slate-400">Cadangkan &amp; pulihkan data penuh saat ganti HP.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Mockup Switcher -->
+                        <div class="pt-3 border-t border-white/10">
+                            <div class="grid grid-cols-2 gap-1.5 bg-dark-900 p-1 rounded-xl">
+                                <button onclick="switchPreview('wallets')" id="btn-wallets" class="text-[11px] font-bold py-1.5 rounded-lg bg-emerald-500 text-slate-950 transition-all">Tampilan Dompet</button>
+                                <button onclick="switchPreview('tools')" id="btn-tools" class="text-[11px] font-semibold py-1.5 rounded-lg text-slate-400 hover:text-white transition-all">Fitur Ekspor</button>
+                            </div>
+                            <div class="text-center text-[10px] text-slate-500 mt-2">JotCash • Created by <span class="text-emerald-400 font-semibold">Rpex</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Features Grid -->
+    <section id="fitur" class="py-20 px-4 bg-dark-900/50 border-y border-white/5">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-emerald-400 font-bold text-xs uppercase tracking-widest">Fitur Lengkap</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-2 mb-4">Semua Kebutuhan Pencatatan Keuangan dalam Satu Aplikasi</h2>
+                <p class="text-slate-400 text-sm sm:text-base">Dirancang khusus untuk kecepatan akses sehari-hari tanpa gangguan iklan maupun koneksi internet.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="glass glass-hover p-7 rounded-3xl transition-all">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center mb-5">
+                        <span class="material-symbols-outlined text-2xl">table_view</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Ekspor Excel Asli (.xlsx)</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Unduh laporan keuangan dalam format Excel asli 2 sheet (Riwayat Transaksi &amp; Ringkasan Dompet) yang langsung rapi dibuka di WPS Office atau Excel HP.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass glass-hover p-7 rounded-3xl transition-all">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-400 flex items-center justify-center mb-5">
+                        <span class="material-symbols-outlined text-2xl">save</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Save Data (Backup &amp; Restore)</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Cadangkan seluruh dompet, saldo, kategori, dan riwayat transaksi ke file <code class="text-emerald-400">.json</code>. Pulihkan kapan saja saat pembaruan aplikasi atau ganti perangkat.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass glass-hover p-7 rounded-3xl transition-all">
+                    <div class="w-12 h-12 rounded-2xl bg-sky-500/15 text-sky-400 flex items-center justify-center mb-5">
+                        <span class="material-symbols-outlined text-2xl">tune</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Sesuaikan Saldo Aktual</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Selisih antara catatan dan uang tunai asli? Ubah saldo berjalan secara langsung tanpa mengotori daftar riwayat transaksi Anda.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass glass-hover p-7 rounded-3xl transition-all">
+                    <div class="w-12 h-12 rounded-2xl bg-rose-500/15 text-rose-400 flex items-center justify-center mb-5">
+                        <span class="material-symbols-outlined text-2xl">category</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Kategori Terpisah &amp; Kustom</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Navigasi tab terpisah berwarna merah untuk Pengeluaran dan hijau untuk Pemasukan, dilengkapi ratusan pilihan ikon modern dan emoji.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="glass glass-hover p-7 rounded-3xl transition-all">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-500/15 text-purple-400 flex items-center justify-center mb-5">
+                        <span class="material-symbols-outlined text-2xl">widgets</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Widget Layar Utama Android</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Catat pemasukan atau pengeluaran secara instan hanya dengan satu ketukan langsung dari layar beranda HP Anda.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="glass glass-hover p-7 rounded-3xl transition-all">
+                    <div class="w-12 h-12 rounded-2xl bg-teal-500/15 text-teal-400 flex items-center justify-center mb-5">
+                        <span class="material-symbols-outlined text-2xl">lock</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">100% Offline &amp; Bebas Iklan</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">Tidak memerlukan pendaftaran email, bebas pelacakan server, tampilan layar penuh bersih, serta mendukung pengaturan ukuran teks (Zoom UI).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Steps -->
+    <section id="instalasi" class="py-20 px-4">
         <div class="max-w-4xl mx-auto">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-emerald-400 text-sm font-medium mb-6">
-                <span class="material-symbols-outlined text-[16px]">verified</span> Versi 3.1.0 Resmi Dirilis
-            </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
-                Kelola Uang Lebih Cerdas, <br class="hidden md:block">
-                <span class="text-gradient">100% Offline &amp; Aman.</span>
-            </h1>
-            <p class="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-                Aplikasi pencatat keuangan Android tanpa iklan, tanpa biaya langganan, dilengkapi ekspor laporan Excel dan pencadangan data penuh langsung di HP Anda.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center" id="download">
-                <a href="JotCash.apk" download class="flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:-translate-y-1">
-                    <span class="material-symbols-outlined">android</span>
-                    Download APK v3.1.0
-                </a>
-                <a href="#fitur" class="flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-2xl font-medium text-lg transition-all border border-slate-700 hover:-translate-y-1">
-                    Pelajari Fitur
-                </a>
-            </div>
-        </div>
-    </section>
+            <div class="glass p-8 sm:p-12 rounded-[2.5rem]">
+                <div class="text-center mb-10">
+                    <span class="text-emerald-400 font-bold text-xs uppercase tracking-widest">Panduan Pengguna</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold mt-2">Cara Mengunduh &amp; Memasang JotCash</h2>
+                    <p class="text-slate-400 text-sm mt-2">Ikuti 3 langkah mudah berikut untuk memasang aplikasi pada perangkat Android Anda.</p>
+                </div>
 
-    <!-- Features Section -->
-    <section id="fitur" class="py-20 bg-slate-900/50">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Dirancang Untuk Kesederhanaan</h2>
-                <p class="text-slate-400 text-lg">Semua fitur pencatatan keuangan yang Anda butuhkan dalam satu aplikasi ringan.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass-card p-8 rounded-3xl">
-                    <div class="w-14 h-14 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center mb-6">
-                        <span class="material-symbols-outlined text-3xl">shield_lock</span>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-dark-950/70 p-6 rounded-2xl border border-white/5">
+                        <div class="w-9 h-9 rounded-xl bg-emerald-500 text-slate-950 font-extrabold flex items-center justify-center mb-4">1</div>
+                        <h3 class="font-bold text-base mb-2">Unduh JotCash.apk</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Tekan tombol <strong>Download JotCash.apk</strong> di halaman ini dan tunggu hingga proses unduhan di peramban selesai.</p>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Privasi &amp; Save Data</h3>
-                    <p class="text-slate-400 leading-relaxed">Data tersimpan lokal tanpa koneksi internet. Dilengkapi fitur cadangkan dan pulihkan data agar riwayat transaksi tetap aman saat ganti HP.</p>
-                </div>
-                <div class="glass-card p-8 rounded-3xl">
-                    <div class="w-14 h-14 bg-blue-500/20 text-blue-400 rounded-2xl flex items-center justify-center mb-6">
-                        <span class="material-symbols-outlined text-3xl">table_view</span>
+
+                    <div class="bg-dark-950/70 p-6 rounded-2xl border border-white/5">
+                        <div class="w-9 h-9 rounded-xl bg-emerald-500 text-slate-950 font-extrabold flex items-center justify-center mb-4">2</div>
+                        <h3 class="font-bold text-base mb-2">Buka &amp; Beri Izin</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Ketuk berkas dari notifikasi atau folder <strong>Download</strong>. Jika diminta izin pemasangan luar Play Store, pilih <strong>Setelan</strong> lalu aktifkan izin.</p>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Ekspor Laporan Excel</h3>
-                    <p class="text-slate-400 leading-relaxed">Unduh laporan pemasukan, pengeluaran, dan ringkasan saldo dompet dalam format Excel yang langsung rapi dibuka di HP.</p>
-                </div>
-                <div class="glass-card p-8 rounded-3xl">
-                    <div class="w-14 h-14 bg-orange-500/20 text-orange-400 rounded-2xl flex items-center justify-center mb-6">
-                        <span class="material-symbols-outlined text-3xl">account_balance_wallet</span>
+
+                    <div class="bg-dark-950/70 p-6 rounded-2xl border border-white/5">
+                        <div class="w-9 h-9 rounded-xl bg-emerald-500 text-slate-950 font-extrabold flex items-center justify-center mb-4">3</div>
+                        <h3 class="font-bold text-base mb-2">Install &amp; Gunakan</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Tekan <strong>Install</strong> (atau <em>Tetap install</em> pada pemberitahuan Play Protect), lalu buka JotCash dari layar utama HP Anda.</p>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Multi Dompet &amp; Penyesuaian</h3>
-                    <p class="text-slate-400 leading-relaxed">Pisahkan uang tunai, rekening bank, dan dompet digital dengan penyesuaian saldo aktual yang praktis dan bersih.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How to Install -->
-    <section class="py-20 px-4">
-        <div class="max-w-3xl mx-auto glass-card p-8 md:p-12 rounded-[2.5rem]">
-            <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">Cara Install APK JotCash</h2>
-            <div class="space-y-6">
-                <div class="flex gap-4 items-start">
-                    <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold flex-shrink-0">1</div>
+    <!-- Changelog & Creator Info -->
+    <section id="changelog" class="py-16 px-4 bg-dark-900/40 border-t border-white/5">
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
+            <!-- Changelog -->
+            <div class="md:col-span-7 glass p-7 rounded-3xl">
+                <h3 class="text-lg font-extrabold mb-5 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-emerald-400">history</span>
+                    Catatan Pembaruan (Changelog)
+                </h3>
+                <div class="space-y-5 border-l-2 border-emerald-500/40 pl-4 ml-2">
                     <div>
-                        <h4 class="font-bold text-lg">Unduh Berkas APK</h4>
-                        <p class="text-slate-400">Tekan tombol Download APK v3.1.0 di bagian atas halaman ini hingga unduhan selesai.</p>
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm font-bold text-white">Versi 3.1.0</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold">Terbaru</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Perubahan identitas resmi menjadi <strong>JotCash</strong> dengan logo baru, serta dukungan ekspor laporan format <strong>Excel asli (.xlsx)</strong> 2 sheet.</p>
+                    </div>
+                    <div>
+                        <div class="text-sm font-bold text-slate-200">Versi 3.0.4 – 3.0.5</div>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Pemisahan tab kategori Pengeluaran (Merah) &amp; Pemasukan (Hijau), serta penyempurnaan fitur Sesuaikan Saldo tanpa membuat riwayat transaksi buatan.</p>
+                    </div>
+                    <div>
+                        <div class="text-sm font-bold text-slate-200">Versi 3.0.2 – 3.0.3</div>
+                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">Penambahan fitur Backup &amp; Restore Save Data (.json), tampilan layar penuh (edge-to-edge), dan kredit kreator Rpex.</p>
                     </div>
                 </div>
-                <div class="flex gap-4 items-start">
-                    <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold flex-shrink-0">2</div>
-                    <div>
-                        <h4 class="font-bold text-lg">Buka Berkas dari Folder Download</h4>
-                        <p class="text-slate-400">Ketuk berkas <strong>JotCash.apk</strong> melalui notifikasi peramban atau pengelola berkas HP Anda.</p>
+            </div>
+
+            <!-- Developer Card -->
+            <div class="md:col-span-5 glass p-7 rounded-3xl flex flex-col justify-between">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-400">Tentang Kreator</span>
+                    <div class="flex items-center gap-3.5 mt-4 mb-4">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-600 text-slate-950 font-extrabold text-xl flex items-center justify-center shadow-lg">
+                            R
+                        </div>
+                        <div>
+                            <h4 class="font-extrabold text-lg text-white leading-tight">Rpex</h4>
+                            <p class="text-xs text-slate-400">Independent App &amp; Web Creator</p>
+                        </div>
                     </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        JotCash dirancang dan dikembangkan secara mandiri oleh <strong class="text-slate-200">Rpex</strong> untuk menghadirkan pencatat keuangan pribadi yang ringan, transparan, dan menghormati privasi pengguna.
+                    </p>
                 </div>
-                <div class="flex gap-4 items-start">
-                    <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold flex-shrink-0">3</div>
-                    <div>
-                        <h4 class="font-bold text-lg">Izinkan Pemasangan Aplikasi</h4>
-                        <p class="text-slate-400">Jika muncul pemberitahuan keamanan Android, pilih <strong>Setelan</strong> lalu aktifkan izin pemasangan dari sumber peramban Anda, kemudian tekan <strong>Install</strong>.</p>
-                    </div>
+
+                <div class="mt-6 pt-4 border-t border-white/10 text-xs text-slate-400 space-y-1.5">
+                    <div class="flex justify-between"><span>Nama Aplikasi:</span><strong class="text-white">JotCash</strong></div>
+                    <div class="flex justify-between"><span>Versi Rilis:</span><strong class="text-emerald-400">3.1.0 (Android)</strong></div>
+                    <div class="flex justify-between"><span>Pembuat Aplikasi &amp; Web:</span><strong class="text-white">Rpex</strong></div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-center mb-10">Pertanyaan yang Sering Diajukan</h2>
+            <div class="space-y-3">
+                <details class="glass rounded-2xl p-5 group" open>
+                    <summary class="font-bold text-sm sm:text-base cursor-pointer list-none flex justify-between items-center text-white">
+                        <span>Apakah data keuangan saya aman di JotCash?</span>
+                        <span class="material-symbols-outlined text-emerald-400 group-open:rotate-180 transition-transform">expand_more</span>
+                    </summary>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-3 leading-relaxed">
+                        Sangat aman. JotCash bekerja 100% secara offline dan menyimpan seluruh catatan langsung di penyimpanan internal HP Anda. Tidak ada data yang dikirim ke server luar mana pun.
+                    </p>
+                </details>
+
+                <details class="glass rounded-2xl p-5 group">
+                    <summary class="font-bold text-sm sm:text-base cursor-pointer list-none flex justify-between items-center text-white">
+                        <span>Bagaimana agar data tidak hilang saat memperbarui aplikasi?</span>
+                        <span class="material-symbols-outlined text-emerald-400 group-open:rotate-180 transition-transform">expand_more</span>
+                    </summary>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-3 leading-relaxed">
+                        Sebelum menghapus aplikasi lama atau pindah ke HP baru, masuk ke menu <strong>Setelan &rarr; Backup Save Data</strong> untuk menyimpan berkas cadangan <code>.json</code> ke folder Download, lalu gunakan menu <strong>Pulihkan Save Data</strong> pada aplikasi baru.
+                    </p>
+                </details>
+
+                <details class="glass rounded-2xl p-5 group">
+                    <summary class="font-bold text-sm sm:text-base cursor-pointer list-none flex justify-between items-center text-white">
+                        <span>Mengapa muncul peringatan saat memasang file APK?</span>
+                        <span class="material-symbols-outlined text-emerald-400 group-open:rotate-180 transition-transform">expand_more</span>
+                    </summary>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-3 leading-relaxed">
+                        Peringatan tersebut adalah prosedur standar Android untuk semua berkas APK yang diunduh langsung dari situs resmi di luar Google Play Store. Anda cukup mengizinkan pemasangan dari peramban untuk melanjutkan.
+                    </p>
+                </details>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 text-center border-t border-slate-800">
-        <p class="text-slate-500 text-sm">
-            &copy; 2026 JotCash App. Dikembangkan oleh Rpex. <br>
-            Aplikasi ini 100% offline dan menjaga privasi data pengguna.
-        </p>
+    <footer class="py-10 px-4 border-t border-white/10 bg-dark-950 text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex items-center justify-center gap-2.5 mb-3">
+                <img src="logo-jotcash.png" alt="JotCash" class="w-7 h-7 rounded-lg" onerror="this.src='https://ui-avatars.com/api/?name=JC&background=10b981&color=fff'">
+                <span class="font-extrabold text-base text-white">JotCash</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-400 mb-2">
+                Aplikasi &amp; Website Resmi Dibuat oleh <strong class="text-emerald-400">Rpex</strong>
+            </p>
+            <p class="text-xs text-slate-500">
+                &copy; 2026 JotCash. Hak cipta dilindungi. Dirancang untuk kemudahan pencatatan keuangan pribadi.
+            </p>
+        </div>
     </footer>
 
+    <!-- Interactive Mockup Script -->
+    <script>
+        function switchPreview(tab) {
+            const walletsView = document.getElementById('preview-wallets');
+            const toolsView = document.getElementById('preview-tools');
+            const btnWallets = document.getElementById('btn-wallets');
+            const btnTools = document.getElementById('btn-tools');
+
+            if (tab === 'wallets') {
+                walletsView.classList.remove('hidden');
+                toolsView.classList.add('hidden');
+                btnWallets.className = 'text-[11px] font-bold py-1.5 rounded-lg bg-emerald-500 text-slate-950 transition-all';
+                btnTools.className = 'text-[11px] font-semibold py-1.5 rounded-lg text-slate-400 hover:text-white transition-all';
+            } else {
+                walletsView.classList.add('hidden');
+                toolsView.classList.remove('hidden');
+                btnTools.className = 'text-[11px] font-bold py-1.5 rounded-lg bg-emerald-500 text-slate-950 transition-all';
+                btnWallets.className = 'text-[11px] font-semibold py-1.5 rounded-lg text-slate-400 hover:text-white transition-all';
+            }
+        }
+    </script>
 </body>
 </html>
